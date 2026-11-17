@@ -73,3 +73,9 @@ def test_index_post_invalid_numbers(client):
 def test_index_post_sin_token_csrf(client):
     response = client.post("/", data={"num1": "2", "num2": "3", "operacion": "sumar"})
     assert response.status_code == 400
+
+
+def test_health(client):
+    response = client.get("/health")
+    assert response.status_code == 200
+    assert response.get_json() == {"status": "ok", "version": "local"}
